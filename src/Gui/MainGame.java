@@ -23,7 +23,7 @@ public class MainGame extends Application {
 
         primaryStage.setTitle("Power Plant");
         primaryStage.initStyle(StageStyle.UTILITY);
-        primaryStage.setScene(new Scene((Parent)loader.load(), 500, 500));
+        primaryStage.setScene(new Scene((Parent)loader.load(), 1024, 768));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

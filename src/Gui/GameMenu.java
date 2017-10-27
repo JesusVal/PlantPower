@@ -27,7 +27,22 @@ public class GameMenu implements Initializable {
         btnstart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                try{
+                    menuPane.getChildren().clear();
 
+                    GameFrame gameFrame = new GameFrame();
+
+                    FXMLLoader loader = new FXMLLoader(
+                            getClass().getResource(
+                                    "game_view.fxml"
+                            )
+                    );
+                    loader.setController(gameFrame);
+                    menuPane.getChildren().add(loader.load());
+
+                } catch (IOException oie) {
+                    oie.printStackTrace();
+                }
             }
         });
 
