@@ -17,10 +17,12 @@ public class Controller implements Initializable {
 
         try {
 
+            String resourcesLocation = "messages.messages";
+            ResourceBundle rb = ResourceBundle.getBundle(resourcesLocation);
+
             contentPane.getChildren().clear();
 
             GameMenu inicioController = new GameMenu();
-            //InicioView inicioController = new InicioView(modeloApp);
 
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(
@@ -28,17 +30,13 @@ public class Controller implements Initializable {
                     )
             );
 
+            loader.setResources(rb);
             loader.setController(inicioController);
-
             contentPane.getChildren().add(loader.load());
 
         } catch ( IOException ioe ) {
             ioe.printStackTrace();
         }
 
-    }
-
-    public Pane getPane(){
-        return this.contentPane;
     }
 }

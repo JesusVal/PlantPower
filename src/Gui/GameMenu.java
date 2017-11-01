@@ -21,8 +21,21 @@ public class GameMenu implements Initializable {
     public Button btnexit;
     public Pane menuPane;
 
+    private ResourceBundle bundle;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.bundle = resources;
+        btnstart.setText(bundle.getString("main_btnstart"));
+        btnload.setText(bundle.getString("main_btnload"));
+        btnoption.setText(bundle.getString("main_btnoption"));
+        btncredit.setText(bundle.getString("main_btncredits"));
+        btnexit.setText(bundle.getString("main_btnexit"));
+
+        String resourcesLocation = "messages.messages";
+        ResourceBundle rb = ResourceBundle.getBundle(resourcesLocation);
+
+
 
         btnstart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -37,6 +50,7 @@ public class GameMenu implements Initializable {
                                     "game_view.fxml"
                             )
                     );
+                    loader.setResources(rb);
                     loader.setController(gameFrame);
                     menuPane.getChildren().add(loader.load());
 
@@ -60,6 +74,7 @@ public class GameMenu implements Initializable {
                                     "credit_view.fxml"
                             )
                     );
+                    loader.setResources(rb);
                     loader.setController(creditPanel);
                     menuPane.getChildren().add(loader.load());
 

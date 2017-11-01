@@ -30,6 +30,8 @@ public class CreditPanel implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    String resourcesLocation = "messages.messages";
+                    ResourceBundle rb = ResourceBundle.getBundle(resourcesLocation);
 
                     parent.getChildren().clear();
 
@@ -42,8 +44,8 @@ public class CreditPanel implements Initializable {
                             )
                     );
 
+                    loader.setResources(rb);
                     loader.setController(inicioController);
-
                     parent.getChildren().add(loader.load());
 
                 } catch ( IOException ioe ) {
