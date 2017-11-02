@@ -15,18 +15,18 @@
     <bottom>
         <HBox nodeOrientation="RIGHT_TO_LEFT" prefWidth="500.0" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="36.0" prefWidth="109.0" text="Version 0.01" />
+                <Label alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="36.0" prefWidth="109.0" text="%general_lblversion" />
             </children>
         </HBox>
     </bottom>
     <center>
         <VBox alignment="BOTTOM_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnstart" mnemonicParsing="false" text="Start" />
-                <Button fx:id="btnload" mnemonicParsing="false" text="Load" />
-                <Button fx:id="btnoption" mnemonicParsing="false" text="Options" />
-                <Button fx:id="btncredit" mnemonicParsing="false" text="Credits" />
-                <Button fx:id="btnexit" mnemonicParsing="false" text="Exit" />
+                <Button fx:id="btnstart" mnemonicParsing="false" text="%main_btnstart" />
+                <Button fx:id="btnload" mnemonicParsing="false" text="%main_btnload" />
+                <Button fx:id="btnoption" mnemonicParsing="false" text="%main_btnoption" />
+                <Button fx:id="btncredit" mnemonicParsing="false" text="%main_btncredits" />
+                <Button fx:id="btnexit" mnemonicParsing="false" text="%main_btnexit" />
             </children>
             <BorderPane.margin>
                 <Insets />

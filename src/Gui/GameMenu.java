@@ -60,6 +60,25 @@ public class GameMenu implements Initializable {
             }
         });
 
+        btnoption.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    menuPane.getChildren().clear();
+                    OptionMenu optionMenu = new OptionMenu(menuPane);
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("option_view.fxml"));
+
+                    loader.setResources(rb);
+                    loader.setController(optionMenu);
+                    menuPane.getChildren().add(loader.load());
+
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            }
+        });
+
         btncredit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
