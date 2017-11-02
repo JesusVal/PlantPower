@@ -11,5 +11,6 @@
       <Label layoutX="71.0" layoutY="179.0" prefHeight="21.0" prefWidth="230.0" text="%credits_developername1" />
       <Label layoutX="900.0" layoutY="722.0" prefHeight="21.0" prefWidth="90.0" text="%general_lblversion" />
       <Button fx:id="btnreturn" layoutX="49.0" layoutY="702.0" mnemonicParsing="false" text="%general_btnreturn" />
+      <Label layoutX="95.0" layoutY="68.0" text="%credits_label" />
    </children>
 </AnchorPane>

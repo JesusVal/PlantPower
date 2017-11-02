@@ -43,15 +43,15 @@ public class GameMenu implements Initializable {
                 try{
                     menuPane.getChildren().clear();
 
-                    GameFrame gameFrame = new GameFrame();
+                    SelectLevelPane selectLevelPane = new SelectLevelPane(menuPane);
 
                     FXMLLoader loader = new FXMLLoader(
                             getClass().getResource(
-                                    "game_view.fxml"
+                                    "select_level_view.fxml"
                             )
                     );
                     loader.setResources(rb);
-                    loader.setController(gameFrame);
+                    loader.setController(selectLevelPane);
                     menuPane.getChildren().add(loader.load());
 
                 } catch (IOException oie) {
