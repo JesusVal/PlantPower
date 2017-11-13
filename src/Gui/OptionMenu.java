@@ -9,12 +9,15 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class OptionMenu implements Initializable {
 
     public Pane optionPane;
     public Button btnreturn;
+    public Button btnspanish;
+    public Button btnenglish;
 
     private Pane parent;
 
@@ -25,6 +28,19 @@ public class OptionMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        btnspanish.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Locale.setDefault(new Locale.Builder().setLanguage("es").setRegion("MX").build());
+            }
+        });
+
+        btnenglish.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Locale.setDefault(new Locale.Builder().setLanguage("en").setRegion("US").build());
+            }
+        });
 
         btnreturn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
