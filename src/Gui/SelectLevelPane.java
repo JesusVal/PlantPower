@@ -27,6 +27,29 @@ public class SelectLevelPane implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
+        btnlvl1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    String resourcesLocation = "messages.messages";
+                    ResourceBundle rb = ResourceBundle.getBundle(resourcesLocation);
+
+                    GameFrame gameFrame = new GameFrame(levelselectPane, parent);
+
+                    levelselectPane.getChildren().clear();
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("game_view.fxml"));
+                    loader.setResources(rb);
+                    loader.setController(gameFrame);
+                    levelselectPane.getChildren().add(loader.load());
+
+
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            }
+        });
+
         btnreturn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
