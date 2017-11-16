@@ -18,6 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.LineTo;
@@ -41,6 +43,10 @@ public class GameFrame implements Initializable {
     public Label lblcoins, lbllife, lblgameover,lblgamewin;
     public Rectangle maintreeshape;
 
+
+    final URL resource = getClass().getResource("sountrack.mp3");
+    final Media media = new Media(resource.toString());
+    final MediaPlayer mediaPlayer = new MediaPlayer(media);
 
     private Pane parent;
     private Pane grandfather;
@@ -77,6 +83,10 @@ public class GameFrame implements Initializable {
 
         lblgameover.setVisible(false);
         lblgamewin.setVisible(false);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+
+
 
         principalTree = new PrincipalTree();
         lblcoins.setText(Integer.toString(principalTree.getCoins()));
@@ -100,6 +110,9 @@ public class GameFrame implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
+
+
+
                 timercounter++;
                 System.out.println("Refresh" + timercounter + " second on UI thread");
 
@@ -183,6 +196,7 @@ public class GameFrame implements Initializable {
                     pathTransition.stop();
                     pathTransition1.stop();
                     pathTransition2.stop();
+                    mediaPlayer.stop();
                     String resourcesLocation = "messages.messages";
                     ResourceBundle rb = ResourceBundle.getBundle(resourcesLocation);
 
