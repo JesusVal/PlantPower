@@ -1,10 +1,13 @@
 package Gui;
 
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -16,6 +19,7 @@ public class CreditPanel implements Initializable {
 
     public AnchorPane creditPane;
     public Button btnreturn;
+
 
     private Pane parent;
 
@@ -53,6 +57,8 @@ public class CreditPanel implements Initializable {
                 }
             }
         });
+
+
 
     }
 
