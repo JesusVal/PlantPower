@@ -1,10 +1,14 @@
 package characters;
 
+
+import javafx.scene.shape.Rectangle;
+
 public class TowerSimple {
 
-    private int damage = 100;
+    private int damage = 400;
     private int velocity = 5;
     private int cost = 400;
+    private Rectangle rectangle;
 
     public TowerSimple(int damage, int velocity) {
         this.damage = damage;
@@ -32,5 +36,11 @@ public class TowerSimple {
         this.cost = cost;
     }
 
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
 
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
 }

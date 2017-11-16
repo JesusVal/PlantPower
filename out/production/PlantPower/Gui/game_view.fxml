@@ -59,6 +59,6 @@
             <Image url="@../resourses/misile.gif" />
          </image>
       </ImageView>
-      <Rectangle fx:id="region1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="50.0" layoutX="330.0" layoutY="359.0" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+      <Rectangle fx:id="region1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="332.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
    </children>
 </Pane>
