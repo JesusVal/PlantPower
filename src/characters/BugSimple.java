@@ -10,12 +10,12 @@ public class BugSimple {
 
     private int lifepoints = 500;
     private int velocity = 2;
-    private int damage = 100;
+    private int damage = 500;
     private Rectangle hitbox;
     private Image simplebugImage = new Image("resourses/simplebug.png");
 
     public BugSimple () {
-        this(500,2,100);
+        this(500,2,500);
     }
 
     public BugSimple(int lifepoints, int velocity, int damage) {

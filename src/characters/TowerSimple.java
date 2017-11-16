@@ -4,6 +4,7 @@ public class TowerSimple {
 
     private int damage = 100;
     private int velocity = 5;
+    private int cost = 400;
 
     public TowerSimple(int damage, int velocity) {
         this.damage = damage;
@@ -24,7 +25,12 @@ public class TowerSimple {
     public void setVelocity(int velocity) {
         this.velocity = velocity;
     }
-
+    public int getCost() {
+        return cost;
+    }
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
 
 
 }
