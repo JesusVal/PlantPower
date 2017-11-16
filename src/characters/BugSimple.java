@@ -11,6 +11,7 @@ public class BugSimple {
     private int lifepoints = 500;
     private int velocity = 2;
     private int damage = 500;
+    private int value = 300;
     private Rectangle hitbox;
     private Image simplebugImage = new Image("resourses/simplebug.png");
 
@@ -31,7 +32,12 @@ public class BugSimple {
     }
 
 
-
+    public int getValue() {
+        return value;
+    }
+    public void setValue(int value) {
+        this.value = value;
+    }
     public Rectangle getHitbox() {
         return hitbox;
     }

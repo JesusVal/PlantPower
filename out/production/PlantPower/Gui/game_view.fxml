@@ -10,6 +10,7 @@
 <?import javafx.scene.shape.MoveTo?>
 <?import javafx.scene.shape.Path?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -24,7 +25,7 @@
          </image>
       </ImageView>
       <Button fx:id="btnreturn" layoutX="74.0" layoutY="50.0" mnemonicParsing="false" text="%general_btnreturn" />
-      <Path fx:id="pathway" fill="TRANSPARENT" layoutX="-8.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE">
+      <Path fx:id="pathway" fill="TRANSPARENT" layoutX="-6.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE">
           <elements>
               <MoveTo x="420.0" y="600.0" />
               <LineTo x="600.0" y="480.0" />
@@ -59,6 +60,31 @@
             <Image url="@../resourses/misile.gif" />
          </image>
       </ImageView>
-      <Rectangle fx:id="region1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="332.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+      <Rectangle fx:id="region1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="332.0" layoutY="328.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+      <Rectangle fx:id="region2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="453.0" layoutY="312.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+      <Rectangle fx:id="region3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="488.0" layoutY="328.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+      <Rectangle fx:id="region4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="446.0" layoutY="398.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+      <Rectangle fx:id="region5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="375.0" layoutY="347.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+      <Rectangle fx:id="region6" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="529.0" layoutY="349.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+       <Rectangle fx:id="region7" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="563.0" layoutY="232.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+       <Rectangle fx:id="region8" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="563.0" layoutY="375.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+       <Rectangle fx:id="region9" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="488.0" layoutY="422.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+       <Rectangle fx:id="region10" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="520.0" layoutY="213.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+       <Rectangle fx:id="region11" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="446.0" layoutY="213.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+       <Rectangle fx:id="region12" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="410.0" layoutY="232.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+       <Rectangle fx:id="region13" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="375.0" layoutY="258.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+       <Rectangle fx:id="region14" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="70.0" layoutX="410.0" layoutY="375.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0" />
+      <Label layoutX="612.0" layoutY="29.0" text="%game_life" />
+      <Label fx:id="lbllife" layoutX="629.0" layoutY="55.0" text="0" />
+      <Label fx:id="lblgameover" layoutX="266.0" layoutY="603.0" prefHeight="142.0" prefWidth="509.0" text="%game_over" textFill="#f20c0c">
+         <font>
+            <Font name="System Bold Italic" size="70.0" />
+         </font></Label>
+      <Label fx:id="lblgamewin" layoutX="280.0" layoutY="566.0" prefHeight="215.0" prefWidth="517.0" text="%game_win" textFill="#56ff07">
+         <font>
+            <Font size="70.0" />
+         </font>
+      </Label>
+       
    </children>
 </Pane>

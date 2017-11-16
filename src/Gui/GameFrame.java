@@ -38,8 +38,7 @@ public class GameFrame implements Initializable {
     public Path pathway;
     public Button btnreturn;
     public Button btnplant;
-    public Rectangle region1;
-    public Label lblcoins;
+    public Label lblcoins, lbllife, lblgameover,lblgamewin;
     public Rectangle maintreeshape;
 
 
@@ -55,8 +54,16 @@ public class GameFrame implements Initializable {
     private PathTransition pathTransition1 = new PathTransition();
     private PathTransition pathTransition2 = new PathTransition();
 
+    private Timeline updater;
+
     private List<TowerSimple> treelist = new ArrayList<TowerSimple>();
     private int timercounter = 0;
+
+    public Rectangle region1, region2,region3,region4,
+            region5,region6,region7,region8,region9,
+            region10,region11,region12,region13,region14;
+
+    private boolean block1 = true, block2 = true, block3 =  true;
 
 
     //private final Rectangle rectPath = new Rectangle (0, 0, 40, 40);;
@@ -68,8 +75,12 @@ public class GameFrame implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        lblgameover.setVisible(false);
+        lblgamewin.setVisible(false);
+
         principalTree = new PrincipalTree();
         lblcoins.setText(Integer.toString(principalTree.getCoins()));
+        lbllife.setText(Integer.toString(principalTree.getLife()));
 
         initializeButtons();
         initializePath();
@@ -85,7 +96,7 @@ public class GameFrame implements Initializable {
 
 
 
-        Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        updater = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
@@ -109,40 +120,69 @@ public class GameFrame implements Initializable {
                 }
 
                 if( simplebug1.isDead()) {
-                    pathTransition.setDuration(Duration.millis(1)); System.out.println("flag78");
+                    if(block1) {
+                        pathTransition.stop();
+                        pathTransition.setDuration(Duration.millis(1));
+                        pathTransition.play();
+                        System.out.println("bug 1 is dead");
+                        block1 = false;
+                    }
                 }
                 if(simplebug2.isDead()) {
-                    pathTransition1.setDuration(Duration.millis(1));
+                    if (block2) {
+                        pathTransition1.stop();
+                        pathTransition1.setDuration(Duration.millis(1));
+                        pathTransition1.play();
+                        System.out.println("bug 2 is dead");
+                        block2 = false;
+                    }
                 }
                 if(simplebug3.isDead()) {
-                    pathTransition2.setDuration(Duration.millis(1));
+                    if (block3) {
+                        pathTransition2.stop();
+                        pathTransition2.setDuration(Duration.millis(1));
+                        pathTransition2.play();
+                        System.out.println("bug 3 is dead");
+                        block3 = false;
+                    }
                 }
 
                 treelist.forEach(item -> {
-                    if(towerIntersects(simplebug1.getHitbox(),item.getRectangle())) {
+                    if(towerIntersects(simplebug1.getHitbox(),item.getRectangle()) && block1) {
                         simplebug1.damaged(item.getDamage()); System.out.println("bug 1 damaged");
                     }
-                    if (towerIntersects(simplebug2.getHitbox(), item.getRectangle())) {
+                    if (towerIntersects(simplebug2.getHitbox(), item.getRectangle()) && block2) {
                         simplebug2.damaged(item.getDamage()); System.out.println("bug 2 damaged");
                     }
-                    if (towerIntersects(simplebug3.getHitbox(), item.getRectangle())) {
+                    if (towerIntersects(simplebug3.getHitbox(), item.getRectangle()) && block3) {
                         simplebug3.damaged(item.getDamage()); System.out.println("bug 3 damaged");
                     }
                 });
 
+
+                if((block1==false && block2==false && block3==false)){
+                    gameOver();
+                }
+
             }
         }));
-        fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-        fiveSecondsWonder.play();
+        updater.setCycleCount(Timeline.INDEFINITE);
+        updater.play();
 
 
     }
 
     private void initializeButtons () {
+
+
         btnreturn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    updater.stop();
+                    pathTransition.stop();
+                    pathTransition1.stop();
+                    pathTransition2.stop();
                     String resourcesLocation = "messages.messages";
                     ResourceBundle rb = ResourceBundle.getBundle(resourcesLocation);
 
@@ -167,9 +207,9 @@ public class GameFrame implements Initializable {
         });
 
         btnplant.setOnAction(event -> {
-            if(( (principalTree.getCoins() - 400) > 0) && (!treeinstack) ) {
-                treelist.add(new TowerSimple());
-                principalTree.setCoins(principalTree.getCoins() - 400);
+            if(( (principalTree.getCoins() - 400) >= 0) && (!treeinstack) ) {
+
+
                 lblcoins.setText(Integer.toString(principalTree.getCoins()));
                 treeinstack = true;
             } else if (treeinstack ) {
@@ -182,17 +222,163 @@ public class GameFrame implements Initializable {
 
         });
 
-        region1.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(treeinstack) {
-                    Image image = new Image("resourses/towertree1.png");
-                    region1.setFill(new ImagePattern(image));
-                    treelist.get(0).setRectangle(region1);
-                    treeinstack = false;
-                }
+
+        region1.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region1.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region1);
+                treeinstack = false;
             }
         });
+        region2.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region2.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region2);
+                treeinstack = false;
+            }
+        });
+        region3.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region3.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region3);
+                treeinstack = false;
+            }
+        });
+        region4.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region4.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region4);
+                treeinstack = false;
+            }
+        });
+        region5.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region5.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region5);
+                treeinstack = false;
+            }
+        });
+        region6.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region6.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region6);
+                treeinstack = false;
+            }
+        });
+        region7.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region7.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region7);
+                treeinstack = false;
+            }
+        });
+        region8.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region8.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region8);
+                treeinstack = false;
+            }
+        });
+        region9.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region9.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region9);
+                treeinstack = false;
+            }
+        });
+        region10.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region10.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region10);
+                treeinstack = false;
+            }
+        });
+        region11.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region11.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region11);
+                treeinstack = false;
+            }
+        });
+        region12.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region12.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region12);
+                treeinstack = false;
+            }
+        });
+        region13.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region13.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region13);
+                treeinstack = false;
+            }
+        });
+        region14.setOnMousePressed(event -> {
+            if(treeinstack) {
+                treelist.add(new TowerSimple());
+                principalTree.setCoins(principalTree.getCoins() - 400);
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+                Image image = new Image("resourses/towertree1.png");
+                region14.setFill(new ImagePattern(image));
+                treelist.get(treelist.size()-1).setRectangle(region14);
+                treeinstack = false;
+            }
+        });
+
+
 
     }
 
@@ -218,17 +404,56 @@ public class GameFrame implements Initializable {
         //pathTransition.setAutoReverse(true);
         //pathTransition.play();
 
-        pathTransition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("chan chan chaaaaaaan");
-                gamePane.getChildren().remove(simplebug1.getHitbox());
+        pathTransition.setOnFinished(event -> {
+            if( simplebug1.isDead()) {
+                principalTree.setCoins(principalTree.getCoins()+simplebug1.getValue());
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+            } else {
+                principalTree.setLife(principalTree.getLife() - simplebug1.getDamage());
+                if (principalTree.getLife() <= 0)
+                    gameOver();
+
+                lbllife.setText(Integer.toString(principalTree.getLife()));
+
             }
+            gamePane.getChildren().remove(simplebug1.getHitbox());
+        });
+
+        pathTransition1.setOnFinished(event -> {
+            if( simplebug2.isDead()) {
+                principalTree.setCoins(principalTree.getCoins()+simplebug2.getValue());
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+            } else {
+                principalTree.setLife(principalTree.getLife() - simplebug2.getDamage());
+                if (principalTree.getLife() <= 0)
+                    gameOver();
+
+                lbllife.setText(Integer.toString(principalTree.getLife()));
+            }
+            gamePane.getChildren().remove(simplebug2.getHitbox());
+        });
+
+        pathTransition2.setOnFinished(event -> {
+            if( simplebug3.isDead()) {
+                principalTree.setCoins(principalTree.getCoins()+simplebug3.getValue());
+                lblcoins.setText(Integer.toString(principalTree.getCoins()));
+            } else {
+                principalTree.setLife(principalTree.getLife() - simplebug3.getDamage());
+                if (principalTree.getLife() <= 0)
+                    gameOver();
+
+                lbllife.setText(Integer.toString(principalTree.getLife()));
+            }
+            gamePane.getChildren().remove(simplebug3.getHitbox());
         });
     }
 
-    private void bugDameged() {
-
+    private void gameOver() {
+        if(block1 || block2 || block3) {
+            lblgameover.setVisible(true);
+        } else {
+            lblgamewin.setVisible(true);
+        }
     }
 
     private boolean towerIntersects (Rectangle rect1, Rectangle rect2) {
